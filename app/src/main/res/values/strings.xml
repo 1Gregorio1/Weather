@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="logo">Погода в городе</string>
+    <string name="hint_city">Введите название города</string>
+    <string name="main_button">Узнать</string>
+    <string name="cyty_error">Город введен не корректно</string>
+
+</resources>

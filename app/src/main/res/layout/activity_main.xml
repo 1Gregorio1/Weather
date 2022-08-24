@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montez"
+        android:text="@string/logo"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="15sp"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_below="@+id/logo"
+        android:backgroundTint="#FFF"
+        android:layout_marginTop="30sp"
+        android:layout_marginHorizontal="50sp"
+        android:hint="@string/hint_city"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/main_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/city"
+        android:layout_marginTop="30sp"
+        android:layout_marginHorizontal="120sp"
+        android:text="@string/main_button"
+        android:backgroundTint="@color/textColor" />
+
+    <TextView
+        android:id="@+id/rezult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montez"
+        android:layout_below="@+id/main_button"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="35sp"
+        android:textSize="30sp" />
+
+</RelativeLayout>
