@@ -17,12 +17,22 @@
         android:layout_marginTop="15sp"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55sp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textSize="20sp" />
+
     <EditText
         android:id="@+id/city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_below="@+id/logo"
+        android:layout_below="@+id/date"
         android:backgroundTint="#FFF"
         android:layout_marginTop="30sp"
         android:layout_marginHorizontal="50sp"

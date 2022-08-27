@@ -1,13 +1,13 @@
 package com.example.weather;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import org.json.simple.JSONArray;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,17 +25,18 @@ public class MainActivity extends AppCompatActivity {
     private EditText city;
     private Button main_button;
     private TextView result_weather;
+    private TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         city = findViewById(R.id.city);
         main_button = findViewById(R.id.main_button);
         result_weather = findViewById(R.id.rezult);
+        date = findViewById(R.id.date);
+
+        date.setText(GetDate.getDate()); //Указываем текущую дату
 
         main_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +77,16 @@ public class MainActivity extends AppCompatActivity {
                     JSONParser parser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) parser.parse(builder.toString());
                     JSONObject main = (JSONObject) jsonObject.get("main");
+                    JSONArray arr = (JSONArray) jsonObject.get("weather");
+                    String description = "";
+                    JSONObject inner = null;
+                    for (int i = 0; i < arr.size(); i++){
+                        inner = (JSONObject) arr.get(i);
+                    }
+                    description = String.valueOf(inner.get("description"));
                     Double temp = (Double) main.get("temp");
-                    runOnUiThread(() -> result_weather.setText((int) Math.round(temp) + ""));
+                    String finalDescription = description;
+                    runOnUiThread(() -> result_weather.setText((int) Math.round(temp)+"\u00B0" + " " + finalDescription));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
