@@ -77,16 +77,15 @@ public class MainActivity extends AppCompatActivity {
                     JSONParser parser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) parser.parse(builder.toString());
                     JSONObject main = (JSONObject) jsonObject.get("main");
-                    JSONArray arr = (JSONArray) jsonObject.get("weather");
-                    String description = "";
-                    JSONObject inner = null;
-                    for (int i = 0; i < arr.size(); i++){
-                        inner = (JSONObject) arr.get(i);
+                    JSONArray weather = (JSONArray) jsonObject.get("weather");
+
+                    JSONObject cloudiness = null;
+                    for (int i = 0; i < weather.size(); i++){
+                        cloudiness = (JSONObject) weather.get(i);
                     }
-                    description = String.valueOf(inner.get("description"));
+                    String description = (String) cloudiness.get("description");
                     Double temp = (Double) main.get("temp");
-                    String finalDescription = description;
-                    runOnUiThread(() -> result_weather.setText((int) Math.round(temp)+"\u00B0" + " " + finalDescription));
+                    runOnUiThread(() -> result_weather.setText((int) Math.round(temp)+"\u00B0" + " " + description));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
