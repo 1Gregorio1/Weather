@@ -51,15 +51,19 @@
         android:text="@string/main_button"
         android:backgroundTint="@color/textColor" />
 
-    <TextView
-        android:id="@+id/rezult"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montez"
-        android:layout_below="@+id/main_button"
-        android:textAlignment="center"
-        android:textColor="@color/textColor"
-        android:layout_marginTop="35sp"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_button" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
