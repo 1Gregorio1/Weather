@@ -14,7 +14,7 @@ import java.net.URL;
 public class SomeClass {
 
     interface Callback {
-        void callingBack(String[] str);
+        void callingBack(String[][] str);
     }
 
     Callback callback;
@@ -43,9 +43,8 @@ public class SomeClass {
                     JSONParser parser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) parser.parse(builder.toString());
                     JSONArray list = (JSONArray) jsonObject.get("list");
-                    System.out.println(list.size());
 
-                    String[] builders = new String[list.size()];
+                    String[][] builders = new String[list.size()][4];
                     JSONObject[] cloudiness = new JSONObject[list.size()];
                     for (int i = 0; i < list.size(); i++) {
                         cloudiness[i] = (JSONObject) list.get(i);
@@ -59,15 +58,27 @@ public class SomeClass {
                             cloudines = (JSONObject) weather.get(i);
                         }
                         String description = (String) cloudines.get("description");
+                        String icon = (String) cloudines.get("icon");
 
                         Double temp = Double.valueOf(main.get("temp").toString());
                         String txt = (String) cloudiness[j].get("dt_txt");
-                        builders[j] = txt + " " + (int) Math.round(temp) + "\u00B0" + "\n " + description;
+                        txt = txt.substring(0, 16);
+                        builders[j][0] = txt;
+                        builders[j][1] = (int) Math.round(temp) + "\u00B0" + "";
+                        builders[j][2] = description;
+                        builders[j][3] = icon;
+
                     }
                     //дошли сюда, вызов того что создали и вызвали в майне
                     callback.callingBack(builders);
                     //runOnUiThread(()
                 } catch (Throwable e) {
+                    String[][] builders = new String[1][4];
+                    builders[0][0] = "Город";
+                    builders[0][1] = " не";
+                    builders[0][2] = " существует";
+                    builders[0][3] = "!";
+                    callback.callingBack(builders);
                     e.printStackTrace();
                 }
             }

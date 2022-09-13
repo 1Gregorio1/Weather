@@ -2,15 +2,20 @@ package com.example.weather;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         main_button = findViewById(R.id.main_button);
         date = findViewById(R.id.date);
         linearLayout = findViewById(R.id.linearLayout);
-
 
         date.setText(GetDate.getDate()); //Указываем текущую дату
 
@@ -55,19 +59,23 @@ public class MainActivity extends AppCompatActivity {
 
                     SomeClass.Callback callBack = new SomeClass.Callback() {
                         @Override
-                        public void callingBack(String[] str) {
-                            String[] weat = str;
+                        public void callingBack(String[][] str) {
+                            String[][] weat = str;
 
                             runOnUiThread(() -> {
                                 for (int i = 0; i < weat.length; i++) {
-                                    //TextView nov = ff
-                                    //Inflater()
-                                    TextView textView = new TextView(getApplicationContext());
-                                    textView.setText(weat[i]);
-                                    textView.setGravity(Gravity.CENTER);
-                                    textView.setTextColor(Color.parseColor("#FFFDFF"));
-                                    textView.setTextSize(20);
-                                    linearLayout.addView(textView);
+
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View view = inflater.inflate(R.layout.item_settings,null, true);
+                                    TextView time = view.findViewById(R.id.time);
+                                    time.setText(weat[i][0]);
+                                    TextView description = view.findViewById(R.id.description);
+                                    description.setText(weat[i][2]);
+                                    TextView temp = view.findViewById(R.id.temp);
+                                    temp.setText(weat[i][1]);
+                                    ImageView icon = view.findViewById(R.id.icon);
+                                    Glide.with(icon).load("https://openweathermap.org/img/wn/"+weat[i][3]+"@2x.png").into(icon);
+                                    linearLayout.addView(view);
                                 }
                             });
 
@@ -84,42 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    protected void createRequest(String url) throws MalformedURLException, IOException, ParseException, JSONException {
-//
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    HttpURLConnection httpClient = (HttpURLConnection) new URL(url).openConnection();
-//                    httpClient.setRequestProperty("Accept-Charset", "UTF-8");
-//                    httpClient.setRequestMethod("GET");
-//                    BufferedReader dateReader = new BufferedReader(new InputStreamReader(httpClient.getInputStream()));
-//                    StringBuilder builder = new StringBuilder("");
-//                    String line = "";
-//                    while ((line = dateReader.readLine()) != null) {
-//                        builder.append(line).append("\n");
-//                    }
-//
-//                    JSONParser parser = new JSONParser();
-//                    JSONObject jsonObject = (JSONObject) parser.parse(builder.toString());
-//                    JSONObject main = (JSONObject) jsonObject.get("main");
-//                    JSONArray weather = (JSONArray) jsonObject.get("weather");
-//
-//                    JSONObject cloudiness = null;
-//                    for (int i = 0; i < weather.size(); i++){
-//                        cloudiness = (JSONObject) weather.get(i);
-//                    }
-//                    String description = (String) cloudiness.get("description");
-//                    Double temp = (Double) main.get("temp");
-//                    runOnUiThread(() -> result_weather.setText((int) Math.round(temp)+"\u00B0" + " " + description));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        thread.start();
-//    }
 }
 
 
