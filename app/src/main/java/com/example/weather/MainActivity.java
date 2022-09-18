@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     linearLayout.removeAllViews();
 
                     TextView textView = new TextView(getApplicationContext());
-                    textView.setText("Погода в городе " + gorod);
+                    textView.setText(gorod);
                     textView.setGravity(Gravity.CENTER);
                     textView.setTextColor(Color.parseColor("#FFFFFF"));
                     textView.setTextSize(25);

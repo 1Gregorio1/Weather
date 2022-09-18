@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#76ABE1"
     tools:context=".MainActivity">
 
     <TextView
@@ -50,6 +50,13 @@
         android:layout_marginHorizontal="120sp"
         android:text="@string/main_button"
         android:backgroundTint="@color/textColor" />
+
+    <TextView
+        android:id="@+id/favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="35sp" />
 
     <ScrollView
         android:id="@+id/scrollView"
